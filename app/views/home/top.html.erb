@@ -1,0 +1,59 @@
+<h2><%= current_user.name%>のスケジュール</h2>
+<%= link_to("予定追加", "/event/post")%><br><br>
+
+<% today = Date.today%>
+<!--  today = Date.today.nextmonth -->
+<table border="1">
+  <caption ><%= today.strftime('%Y年%m月')%></caption>
+  <tr>
+    <th>日</th>
+    <th>月</th>
+    <th>火</th>
+    <th>水</th>
+    <th>木</th>
+    <th>金</th>
+    <th>土</th>
+  </tr>
+
+<% month = today.strftime('%m')%>
+<% d = today.at_beginning_of_month.at_beginning_of_week(:sunday)%>
+<% free = "暇"%>
+<% j = 0 %>
+
+<% 1.upto(5).each do|i|%>
+  <tr>
+  <% (d..d.end_of_week(:sunday)).each do|c|%>
+    <td>
+      <%= (c.strftime('%m') == month)? c.strftime('%d'): "  "%><br>
+
+      <% @events.each do |event|%>
+        <% if event.start_date.strftime("%Y-%m-%d") == c.strftime("%Y-%m-%d") then %>
+          <%= link_to("#{event.event}", "/event/#{event.id}/show") %><br>
+          <% j = j + 1 %>
+        <% end %>
+      <% end %>
+
+      <% if j == 0 then %>
+        <% if c.strftime('%m') == month then %>
+
+        <% end %>
+      <% end %>
+
+      <% j = 0 %>
+
+
+    </td>
+  <% end %>
+  </tr>
+
+    <% d = d + 1.week %>
+<% end %>
+
+</table>
+
+<%@events.each do |event| %>
+<%= event.event%>,
+<%= event.start_date%>,
+<%= event.description%>,
+<%= event.user_id%><br>
+<% end %>

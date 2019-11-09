@@ -1,0 +1,8 @@
+<h2>予定詳細</h2>
+イベント: <%= @event.event%><br>
+日時　　: <%= @event.start_date.strftime("%Y年%m月%d日")%><br><br>
+詳細<br>
+<%= @event.description%><br><br>
+<%= link_to("戻る", "/home/top")%>　
+<%= link_to("編集", "/event/#{@event.id}/edit")%>　
+<%= link_to("削除", "/event/#{@event.id}/destroy", {method:"post"})%>
