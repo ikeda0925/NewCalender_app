@@ -3,11 +3,13 @@
 
 予定
 <input type="text" name="event"><br>
-<input type="date" name="start_date"><br><br>
+日付
+<input type="date" name="start_date"><br>
+時間
+<input type="time" name="time"><br><br>
 
 詳細<br>
 <textarea name="description"></textarea><br><br>
-<%= link_to("戻る", "../home/top")%>　
-
-<input type="submit" value="追加">
+<input type="submit" value="追加"><br><br>
+<%= link_to("戻る", "/home/top")%>　
 <%end%>
